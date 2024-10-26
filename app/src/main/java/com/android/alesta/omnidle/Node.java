@@ -1,3 +1,5 @@
+package com.android.alesta.omnidle;
+
 class Node<T> {
     public T data;
     public Node<T> next;

@@ -1,7 +1,10 @@
+package com.android.alesta.omnidle;
 import java.util.ArrayList;
 
-public class Main {
+
+public class Main{
     public static void main(String[] args) {
+
         ArrayList<ArrayList<String>> array = new ArrayList<>();
 
         ArrayList<String> innerList1 = new ArrayList<>();

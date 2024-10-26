@@ -1,4 +1,6 @@
-class CircularLinkedList<T> {
+package com.android.alesta.omnidle;
+
+class CircularLinkedList<T>  {
     public  Node<T> head;
 
     public void insertToEnd(T data) {
