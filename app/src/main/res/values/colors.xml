@@ -2,4 +2,11 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="trans">#00000000 </color>
+    <color name="background_green">#65AF8C</color>
+    <color name="frame_green">#0B3519 </color>
+    <color name="wrong_red">#FFD700</color>
+    <color name="pass_yellow">#FFD700</color>
+    <color name="correct_green">#14D954</color>
+
 </resources>

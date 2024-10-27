@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_green"
+    tools:context=".PlayingActivity">
+
+    <TextView
+        android:id="@+id/txtOmnidle2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="55dp"
+        android:fontFamily="@font/poetsen_one"
+        android:text="OMNIDLE"
+        android:textColor="@color/frame_green"
+        android:textSize="65sp"
+        app:layout_constraintBottom_toTopOf="@+id/eTxtInput"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/eTxtInput"
+        android:layout_width="349dp"
+        android:layout_height="57dp"
+        android:layout_marginTop="148dp"
+        android:ems="10"
+        android:fontFamily="@font/poetsen_one"
+        android:hint="Oynamak İstediğiniz Konuyu Seçin"
+        android:inputType="text"
+        android:textColorHint="@color/frame_green"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.258"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtOmnidle2" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/eTxtInput"
+        app:layout_constraintVertical_bias="0.096">
+
+        <Button
+            android:id="@+id/btnConfirm"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:layout_weight="1"
+            android:background="@color/trans"
+            android:fontFamily="@font/poetsen_one"
+            android:text="ONAYLA"
+            android:textColor="@color/frame_green"
+            android:textSize="25sp" />
+
+        <Button
+            android:id="@+id/btnBack"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_weight="1"
+            android:background="@color/trans"
+            android:fontFamily="@font/poetsen_one"
+            android:text="GERİ DÖN"
+            android:textColor="@color/frame_green"
+            android:textSize="25sp" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
