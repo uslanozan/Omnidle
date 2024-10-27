@@ -50,9 +50,10 @@ public class PlayingActivity extends AppCompatActivity {
                 if (topic!=null){
                     /*
                     "LLM FONKSİYONU"
-                    Intent intent = new Intent(PlayingActivity.this,"DİĞER AKTİVİTE YAZILACAK");
                     startActivities("LLM",intent);
                      */
+                    Intent intent = new Intent(PlayingActivity.this, QuestionsActivity.class);
+                    startActivity(intent);
                 }else {
                     String errorMessage = "Lütfen bir konu seçin !";
                     Toast.makeText(getApplicationContext(), errorMessage, Toast.LENGTH_SHORT).show();

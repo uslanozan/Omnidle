@@ -43,7 +43,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/poetsen_one"
-        android:text="OMNIDLE"
+        android:text="@string/title_omnidle"
         android:textColor="@color/frame_green"
         android:textSize="65sp"
         app:layout_constraintBottom_toTopOf="@+id/btnPlay"

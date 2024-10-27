@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="55dp"
         android:fontFamily="@font/poetsen_one"
-        android:text="OMNIDLE"
+        android:text="@string/title_omnidle"
         android:textColor="@color/frame_green"
         android:textSize="65sp"
         app:layout_constraintBottom_toTopOf="@+id/eTxtInput"
@@ -29,7 +29,7 @@
         android:layout_marginTop="148dp"
         android:ems="10"
         android:fontFamily="@font/poetsen_one"
-        android:hint="Oynamak İstediğiniz Konuyu Seçin"
+        android:hint="@string/text_hint"
         android:inputType="text"
         android:textColorHint="@color/frame_green"
         android:textSize="20sp"
@@ -59,7 +59,7 @@
             android:layout_weight="1"
             android:background="@color/trans"
             android:fontFamily="@font/poetsen_one"
-            android:text="ONAYLA"
+            android:text="@string/button_confirm"
             android:textColor="@color/frame_green"
             android:textSize="25sp" />
 
@@ -71,7 +71,7 @@
             android:layout_weight="1"
             android:background="@color/trans"
             android:fontFamily="@font/poetsen_one"
-            android:text="GERİ DÖN"
+            android:text="@string/button_back"
             android:textColor="@color/frame_green"
             android:textSize="25sp" />
     </LinearLayout>
