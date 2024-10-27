@@ -16,7 +16,7 @@
             android:name=".questionMaker"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".questionCreator"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
