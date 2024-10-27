@@ -13,6 +13,8 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import java.util.ArrayList;
+
 public class PlayingActivity extends AppCompatActivity {
 
     Button buttonBack;
@@ -40,19 +42,17 @@ public class PlayingActivity extends AppCompatActivity {
             }
         });
 
-        editText = findViewById(R.id.eTxtInput);
-        topic = editText.getText().toString();
+
 
         buttonConfirm = findViewById(R.id.btnConfirm);
         buttonConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                editText = findViewById(R.id.eTxtInput);
+                topic = editText.getText().toString();
                 if (topic!=null){
-                    /*
-                    "LLM FONKSİYONU"
-                    Intent intent = new Intent(PlayingActivity.this,"DİĞER AKTİVİTE YAZILACAK");
-                    startActivities("LLM",intent);
-                     */
+                    questionCreator maker = new questionCreator();
+                    maker.generateText(topic,getApplicationContext());
                 }else {
                     String errorMessage = "Lütfen bir konu seçin !";
                     Toast.makeText(getApplicationContext(), errorMessage, Toast.LENGTH_SHORT).show();

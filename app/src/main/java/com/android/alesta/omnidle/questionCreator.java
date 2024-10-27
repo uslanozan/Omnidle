@@ -1,6 +1,9 @@
 package com.android.alesta.omnidle;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -28,56 +31,56 @@ import android.content.Context;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-
+import java.util.ArrayList;
 
 
 public class questionCreator extends AppCompatActivity {
 
 
-    private TextView textView;
+
     String string="";
     String filename = "myfile";
     String regex = "'\\w': \\['([^']*)', '([^']*)'\\]";
-    Context context =this;
+    String topic;
+    ArrayList<ArrayList<String>> questAnsw = new ArrayList<>();
+    ArrayList<String> answers = new ArrayList<>();
+    ArrayList<String> questions = new ArrayList<>();
+    EditText editText;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.question_creator);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
+        Bundle bundle = getIntent().getExtras();
 
-
-        FileInputStream fis = null;
-        try {
-            fis = context.openFileInput("myfile");
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-        InputStreamReader inputStreamReader =
-                new InputStreamReader(fis, StandardCharsets.UTF_8);
-        StringBuilder stringBuilder = new StringBuilder();
-        try (BufferedReader reader = new BufferedReader(inputStreamReader)) {
-            String line = reader.readLine();
-            while (line != null) {
-                stringBuilder.append(line).append('\n');
-                line = reader.readLine();
-            }
-            string=stringBuilder.toString();
-            System.out.println(string);
-        } catch (IOException e) {
-            // Error occurred when opening raw file for reading.
-        } finally {
-            String contents = stringBuilder.toString();
-        }
-        textView=findViewById(R.id.demotext);
-        generateText("physics");
 
     }
-        public void generateText(String subject){
+
+        public  void generateText(String subject,Context context){
+            FileInputStream fis = null;
+            try {
+                fis = context.openFileInput("myfile");
+            } catch (FileNotFoundException e) {
+                throw new RuntimeException(e);
+            }
+            InputStreamReader inputStreamReader =
+                    new InputStreamReader(fis, StandardCharsets.UTF_8);
+            StringBuilder stringBuilder = new StringBuilder();
+            try (BufferedReader reader = new BufferedReader(inputStreamReader)) {
+                String line = reader.readLine();
+                while (line != null) {
+                    stringBuilder.append(line).append('\n');
+                    line = reader.readLine();
+                }
+                string=stringBuilder.toString();
+
+            } catch (IOException e) {
+                // Error occurred when opening raw file for reading.
+            } finally {
+                String contents = stringBuilder.toString();
+            }
+
             Pattern pattern = Pattern.compile(regex);
 
 
@@ -103,6 +106,7 @@ public class questionCreator extends AppCompatActivity {
             Executor executor = Executors.newSingleThreadExecutor();
 
             ListenableFuture<GenerateContentResponse> response = model.generateContent(content);
+
             Futures.addCallback(
                     response,
                     new FutureCallback<GenerateContentResponse>() {
@@ -111,14 +115,18 @@ public class questionCreator extends AppCompatActivity {
                             string ="";
                             String resultText = result.getText();
                             Matcher matcher = pattern.matcher(resultText);
-
                             // Find matches and capture groups
                             while (matcher.find()) {
                                 String answer = matcher.group(1);
                                 String question = matcher.group(2);
-                                string=string+answer+",";
+                                answers.add(answer);
+                                questions.add(question);
+                                string=string + answer+",";
+
                             }
                             System.out.println(string);
+                            questAnsw.add(answers);
+                            questAnsw.add(questions);
                             try (FileOutputStream fos = context.openFileOutput(filename, Context.MODE_PRIVATE)) {
                                 fos.write(string.getBytes(StandardCharsets.UTF_8));
                             } catch (FileNotFoundException e) {
@@ -133,6 +141,6 @@ public class questionCreator extends AppCompatActivity {
                             t.printStackTrace();
                         }
                     },
-                    this.getMainExecutor());
+                    context.getMainExecutor());
         }
 }
