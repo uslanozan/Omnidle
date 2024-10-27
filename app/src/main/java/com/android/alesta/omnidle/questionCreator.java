@@ -87,7 +87,7 @@ public class questionCreator extends AppCompatActivity {
                             /* modelName */ "gemini-1.5-flash",
                             // Access your API key as a Build Configuration variable (see "Set up your API key"
                             // above)
-                            /* apiKey */ "AIzaSyBRyOUHZUCuYqHQK6JqRPObQpCv9krug8g");
+                            /* apiKey */ "");
             GenerativeModelFutures model = GenerativeModelFutures.from(gm);
         String prompt ="Create a Python dictionary where each key is a letter from \"a\" to \"z\" and the value is a list with two items:\n" +
                 "A %s-related word starting with that letter, avoid the words %s.\n" +
