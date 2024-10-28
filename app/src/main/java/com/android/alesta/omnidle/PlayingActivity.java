@@ -14,6 +14,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class PlayingActivity extends AppCompatActivity {
 
@@ -21,7 +22,10 @@ public class PlayingActivity extends AppCompatActivity {
     Button buttonConfirm;
     EditText editText;
     String topic;
-
+    ArrayList<String> turkishAlphabet = new ArrayList<>(Arrays.asList(
+            "A", "B", "C", "Ç", "D", "E", "F", "G", "Ğ", "H", "I", "İ", "J", "K", "L", "M",
+            "N", "O", "Ö", "P", "R", "S", "Ş", "T", "U", "Ü", "V", "Y", "Z"
+    ));
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,8 +55,21 @@ public class PlayingActivity extends AppCompatActivity {
                 editText = findViewById(R.id.eTxtInput);
                 topic = editText.getText().toString();
                 if (topic!=null){
-                    questionCreator maker = new questionCreator();
-                    maker.generateText(topic,getApplicationContext());
+                    QuestionCreator maker = new QuestionCreator();
+                    maker.generateText(topic, getApplicationContext(), new QuestionCreator.GenerateTextCallback() {
+                        @Override
+                        public void onSuccess(ArrayList<ArrayList<String>> questAnsw) {
+                            System.out.println(questAnsw);
+                            CircularLinkedList<ArrayList<String>> circular=new CircularLinkedList<>();
+                            circular.insertToEnd(questAnsw.get(0));
+                        }
+
+                        @Override
+                        public void onFailure(Exception e) {
+                            System.out.println("Generation Failed");
+                        }
+                    });
+
                 }else {
                     String errorMessage = "Lütfen bir konu seçin !";
                     Toast.makeText(getApplicationContext(), errorMessage, Toast.LENGTH_SHORT).show();

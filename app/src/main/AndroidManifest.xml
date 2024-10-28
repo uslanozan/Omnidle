@@ -16,7 +16,7 @@
             android:name=".PlayingActivity"
             android:exported="false" />
         <activity
-            android:name=".questionCreator"
+            android:name=".QuestionCreator"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
