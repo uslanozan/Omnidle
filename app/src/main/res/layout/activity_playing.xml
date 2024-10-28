@@ -14,6 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="55dp"
         android:fontFamily="@font/poetsen_one"
+        android:gravity="center"
         android:text="@string/title_omnidle"
         android:textColor="@color/frame_green"
         android:textSize="65sp"
@@ -34,22 +35,19 @@
         android:textColorHint="@color/frame_green"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.258"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtOmnidle2" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="0dp"
+        android:layout_width="411dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="56dp"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/eTxtInput"
-        app:layout_constraintVertical_bias="0.096">
+        app:layout_constraintTop_toBottomOf="@+id/eTxtInput">
 
         <Button
             android:id="@+id/btnConfirm"
