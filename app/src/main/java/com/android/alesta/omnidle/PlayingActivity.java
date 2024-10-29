@@ -81,12 +81,6 @@ public class PlayingActivity extends AppCompatActivity {
         });
 
         editText = findViewById(R.id.eTxtInput);
-        System.out.println(331313131);
-
-        //TODO: DEĞİŞECEK
-        Assets assets = new Assets();
-        assets.setAnswers(tempAnswers);
-        assets.setQuestions(tempQuestions);
 
         /*
         TODO:BURADA BELİRLENEN KONUYA GÖRE SORULAR VE CEVAPLAR HAZIRLANACAK ŞUAN MANUAL GİRİLMEKTE
