@@ -14,6 +14,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import java.util.ArrayList;
 import java.util.Locale;
 
 public class QuestionsActivity extends AppCompatActivity {
@@ -25,7 +26,7 @@ public class QuestionsActivity extends AppCompatActivity {
     TextView txtQuestion;
     TextView txtTimer;
     CountDownTimer timer;
-
+    ArrayList<ArrayList<String>> questAnsw;
 
 
     @Override
@@ -38,6 +39,12 @@ public class QuestionsActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null) {
+            questAnsw = (ArrayList<ArrayList<String>>) bundle.getSerializable("questansw"); // Use the same key
+            System.out.println(questAnsw);
+        }
+
         txtTimer = findViewById(R.id.txtTimer);
         startTime();
 
