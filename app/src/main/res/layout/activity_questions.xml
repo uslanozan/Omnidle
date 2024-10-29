@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:background="@color/background_green"
+    tools:context=".QuestionsActivity">
+
+
+    <TextView
+        android:id="@+id/txtLetter"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/circle"
+        android:fontFamily="@font/poetsen_one"
+        android:gravity="center"
+        android:text="A"
+        android:textColor="@color/frame_green"
+        android:textSize="120sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtTimer" />
+
+    <TextView
+        android:id="@+id/txtQuestion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/poetsen_one"
+        android:text="EKSİ YÜKLÜ ATOM NEDİR?"
+        android:textColor="@color/frame_green"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtLetter" />
+
+    <TextView
+        android:id="@+id/txtTimer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:fontFamily="@font/poetsen_one"
+        android:gravity="center"
+        android:text="05:00"
+        android:textColor="@color/frame_green"
+        android:textSize="40sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btnPass"
+        android:layout_width="179dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="28dp"
+        android:background="@color/trans"
+        android:fontFamily="@font/poetsen_one"
+        android:text="PAS"
+        android:textColor="@color/frame_green"
+        android:textSize="35sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.567"
+        app:layout_constraintStart_toEndOf="@+id/btnOk"
+        app:layout_constraintTop_toBottomOf="@+id/eTxtAnswer" />
+
+    <Button
+        android:id="@+id/btnOk"
+        android:layout_width="179dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="28dp"
+        android:background="@color/trans"
+        android:fontFamily="@font/poetsen_one"
+        android:text="ONAYLA"
+        android:textColor="@color/frame_green"
+        android:textSize="35sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/eTxtAnswer" />
+
+    <EditText
+        android:id="@+id/eTxtAnswer"
+        android:layout_width="331dp"
+        android:layout_height="53dp"
+        android:layout_marginTop="80dp"
+        android:ems="10"
+        android:fontFamily="@font/poetsen_one"
+        android:hint="Cevabı Girin"
+        android:inputType="text"
+        android:textColor="@color/frame_green"
+        android:textColorHint="@color/frame_green"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtQuestion" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
