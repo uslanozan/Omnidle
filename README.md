@@ -7,7 +7,7 @@
 ## İçindekiler
 
 - [Nasıl Bir Oyundur?](#nasıl-bir-oyundur)
-- [Eğitim ile İlişkisi](#eğitim-ile-ilişkisi)
+- [Eğitim ile İlişkisi](#eğitim-ile-i̇lişkisi)
 - [Nasıl Oynanır?](#nasıl-oynanır)
 - [Kullanıcı Arayüzü](#kullanıcı-arayüzü)
 
