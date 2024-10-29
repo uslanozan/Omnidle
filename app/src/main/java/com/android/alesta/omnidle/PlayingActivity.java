@@ -52,7 +52,7 @@ public class PlayingActivity extends AppCompatActivity {
             public void onClick(View v) {
                 editText = findViewById(R.id.eTxtInput);
                 topic = editText.getText().toString();
-                if (topic!=null){
+                if (!topic.isEmpty()){
                     QuestionCreator maker = new QuestionCreator();
                     maker.generateText(topic, getApplicationContext(), new QuestionCreator.GenerateTextCallback() {
                         @Override

@@ -1,5 +1,6 @@
 package com.android.alesta.omnidle;
 
+import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -22,12 +23,6 @@ import java.util.Objects;
 
 public class QuestionsActivity extends AppCompatActivity {
 
-    // Renk tanımlamaları
-    int correctGreen = ContextCompat.getColor(getApplicationContext(), R.color.correct_green);
-    int wrongRed = ContextCompat.getColor(getApplicationContext(), R.color.wrong_red);
-    int passYellow = ContextCompat.getColor(getApplicationContext(), R.color.pass_yellow);
-    int whiteEmpty = ContextCompat.getColor(getApplicationContext(), R.color.white);
-
     Button btnOK;
     Button btnPass;
     EditText eTxtAnswer;
@@ -38,8 +33,8 @@ public class QuestionsActivity extends AppCompatActivity {
 
     //TODO: ŞUANLIK LİSTE BOŞ
     CircularLinkedList<ArrayList<String>> questions = new CircularLinkedList<>();
+    ArrayList<ArrayList<String>> questAnsw;
     Node<ArrayList<String>> question = questions.head;
-    int questionsNumber = questions.countNodes();
 
 
     @Override
@@ -53,11 +48,33 @@ public class QuestionsActivity extends AppCompatActivity {
             return insets;
         });
 
+        // Renk tanımlamaları
+        Drawable correctGreen = ContextCompat.getDrawable(getApplicationContext(), R.drawable.circle_green);
+        Drawable wrongRed = ContextCompat.getDrawable(getApplicationContext(), R.drawable.circle_red);
+        Drawable passYellow = ContextCompat.getDrawable(getApplicationContext(), R.drawable.circle_yellow);
+        Drawable whiteEmpty = ContextCompat.getDrawable(getApplicationContext(), R.drawable.circle_white);
+
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null) {
+            questAnsw = (ArrayList<ArrayList<String>>) bundle.getSerializable("questansw"); // Use the same key
+            for (ArrayList<String> question:questAnsw
+            ) {
+                questions.insertToEnd(question);
+
+            }
+            questions.display();
+        }
+
+        question = questions.head;
+
         // HARF
         txtLetter = findViewById(R.id.txtLetter);
 
         // SORU
         txtQuestion = findViewById(R.id.txtQuestion);
+
+        System.out.println(questions);
+        System.out.println(question);
 
         txtLetter.setText(question.data.get(0));
         txtQuestion.setText(question.data.get(2));
@@ -78,27 +95,34 @@ public class QuestionsActivity extends AppCompatActivity {
                 eTxtAnswer = findViewById(R.id.eTxtAnswer);
                 // Doğru
                 if (Objects.equals(eTxtAnswer.getText().toString().toLowerCase(), question.data.get(1).toLowerCase())){
-                    txtLetter.setBackgroundColor(correctGreen);
+                    //TODO: BİR SONRAKİNİ YAPIYOR KENDİSİNİ DEĞİL
+                    txtLetter.setBackground(correctGreen);
+                    System.out.println(eTxtAnswer.getText().toString()+"TRUE");
                     question.isEmpty = false;
                 }
                 // Pas geçme durumu
                 else {
                     if (eTxtAnswer.getText().toString().isEmpty()) {
-                        txtLetter.setBackgroundColor(passYellow);
+                        txtLetter.setBackground(passYellow);
+                        System.out.println(eTxtAnswer.getText().toString()+"PASS");
                     }
                     // Yanlış
                     else {
-                        txtLetter.setBackgroundColor(wrongRed);
+                        txtLetter.setBackground(wrongRed);
+                        System.out.println(eTxtAnswer.getText().toString()+"FALSE");
                         question.isEmpty = false;
                     }
                 }
+                //TODO: BEKLEME İŞİ ÇALIŞMIYOR DÜZELT
+                /*
                 try {
                     wait(500);
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
+                 */
 
-                txtLetter.setBackgroundColor(whiteEmpty);
+                txtLetter.setBackground(whiteEmpty);
                 question= question.next;
                 txtLetter.setText(question.data.get(0));
                 txtQuestion.setText(question.data.get(2));
@@ -111,8 +135,8 @@ public class QuestionsActivity extends AppCompatActivity {
         btnPass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                txtLetter.setBackgroundColor(passYellow);
-                txtLetter.setBackgroundColor(whiteEmpty);
+                txtLetter.setBackground(passYellow);
+                txtLetter.setBackground(whiteEmpty);
                 question= question.next;
                 txtLetter.setText(question.data.get(0));
                 txtQuestion.setText(question.data.get(2));
