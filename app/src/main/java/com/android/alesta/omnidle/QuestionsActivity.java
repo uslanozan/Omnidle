@@ -42,7 +42,13 @@ public class QuestionsActivity extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
             questAnsw = (ArrayList<ArrayList<String>>) bundle.getSerializable("questansw"); // Use the same key
-            System.out.println(questAnsw);
+            CircularLinkedList linkedList = new CircularLinkedList();
+            for (ArrayList<String> question:questAnsw
+                 ) {
+                linkedList.insertToEnd(question);
+
+            }
+            linkedList.display();
         }
 
         txtTimer = findViewById(R.id.txtTimer);
