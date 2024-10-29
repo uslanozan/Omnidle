@@ -24,4 +24,4 @@
    erdiğinde kullanıcı, karşısına çıkan ekranda cevaplarını analiz edebilir.
 
 ### Kullanıcı Arayüzü
-![Omnidle](https://github.com/user-attachments/assets/07a3fe58-a7cc-40c7-a37d-cc3bf037e892)
+![Omnidle](https://github.com/user-attachments/assets/07a3fe58-a7cc-40c7-a37d-cc3bf037e892)  
