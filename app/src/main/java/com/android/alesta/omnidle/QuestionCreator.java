@@ -18,6 +18,7 @@ import java.io.FileOutputStream;
 import java.nio.charset.StandardCharsets;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import android.content.Context;
@@ -37,9 +38,12 @@ public class QuestionCreator extends AppCompatActivity {
     String regex = "'\\w': \\['([^']*)', '([^']*)'\\]";
     String topic;
     ArrayList<ArrayList<String>> questAnsw = new ArrayList<>();
-    ArrayList<String> answers = new ArrayList<>();
-    ArrayList<String> questions = new ArrayList<>();
+
     EditText editText;
+    ArrayList<String> turkishAlphabet = new ArrayList<>(Arrays.asList(
+            "A", "B", "C", "Ç", "D", "E", "F", "G", "H", "I", "İ", "J", "K", "L", "M",
+            "N", "O", "Ö", "P", "R", "S", "Ş", "T", "U", "Ü", "V", "Y", "Z"
+    ));
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,17 +108,19 @@ public class QuestionCreator extends AppCompatActivity {
                             string ="";
                             String resultText = result.getText();
                             Matcher matcher = pattern.matcher(resultText);
-
+                            int i=0;
                             while (matcher.find()) {
+                                ArrayList<String> questions = new ArrayList<>();
                                 String answer = matcher.group(1);
                                 String question = matcher.group(2);
-                                answers.add(answer);
-                                questions.add(question);
-                                string=string + answer+",";
-                            }
 
-                            questAnsw.add(answers);
-                            questAnsw.add(questions);
+                                questions.add(turkishAlphabet.get(i));
+                                questions.add(answer);
+                                questions.add(question);
+                                questAnsw.add(questions);
+                                string=string + answer+",";
+                                i++;
+                            }
 
                             try (FileOutputStream fos = context.openFileOutput(filename, Context.MODE_PRIVATE)) {
                                 fos.write(string.getBytes(StandardCharsets.UTF_8));

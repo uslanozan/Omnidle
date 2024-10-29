@@ -22,10 +22,7 @@ public class PlayingActivity extends AppCompatActivity {
     Button buttonConfirm;
     EditText editText;
     String topic;
-    ArrayList<String> turkishAlphabet = new ArrayList<>(Arrays.asList(
-            "A", "B", "C", "Ç", "D", "E", "F", "G", "Ğ", "H", "I", "İ", "J", "K", "L", "M",
-            "N", "O", "Ö", "P", "R", "S", "Ş", "T", "U", "Ü", "V", "Y", "Z"
-    ));
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,7 +58,7 @@ public class PlayingActivity extends AppCompatActivity {
                         public void onSuccess(ArrayList<ArrayList<String>> questAnsw) {
                             System.out.println(questAnsw);
                             CircularLinkedList<ArrayList<String>> circular=new CircularLinkedList<>();
-                            circular.insertToEnd(questAnsw.get(0));
+
                         }
 
                         @Override
