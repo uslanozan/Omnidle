@@ -2,6 +2,7 @@ package com.android.alesta.omnidle;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,7 +14,8 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import java.util.Objects;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class PlayingActivity extends AppCompatActivity {
 
@@ -21,44 +23,6 @@ public class PlayingActivity extends AppCompatActivity {
     Button buttonConfirm;
     EditText editText;
     String topic;
-
-    public String [] tempAnswers = {
-            "average", "base", "circle", "decimal", "exponent", "factor",
-            "graph", "histogram", "inequality", "justify", "kilogram", "length",
-            "mean", "numerator", "odd", "perimeter", "quotient", "ratio",
-            "slope", "tangent", "unit", "vector",
-            "width", "x-axis", "y-axis", "zero"
-    };
-
-    public String[] tempQuestions = {
-            "What is the sum of a set of numbers divided by the count of numbers?",
-            "What is the bottom side of a triangle called?",
-            "What shape is defined by all points equidistant from a central point?",
-            "What is a fractional number represented by a dot and digits?",
-            "What indicates the number of times a base is multiplied by itself?",
-            "What number divides another number evenly?",
-            "What visual representation shows relationships between variables?",
-            "What type of chart displays frequency distribution?",
-            "What mathematical statement compares two expressions using greater than, less than, or equal to?",
-            "What do you do when you provide reasons for your mathematical steps?",
-            "What unit measures mass?",
-            "What is the distance between two points?",
-            "What is the average of a set of numbers?",
-            "What is the top number in a fraction called?",
-            "What kind of number is not divisible by 2?",
-            "What is the total distance around a two-dimensional shape?",
-            "What is the result of division?",
-            "What compares two quantities?",
-            "What describes the steepness of a line?",
-            "What is the line that touches a circle at only one point?",
-            "What is a standard measurement?",
-            "What has both magnitude and direction?",
-            "What is the horizontal distance of a rectangle?",
-            "What is the horizontal axis in a coordinate plane?",
-            "What is the vertical axis in a coordinate plane?",
-            "What is the additive identity?"
-    };
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,24 +44,32 @@ public class PlayingActivity extends AppCompatActivity {
             }
         });
 
-        editText = findViewById(R.id.eTxtInput);
 
-        /*
-        TODO:BURADA BELİRLENEN KONUYA GÖRE SORULAR VE CEVAPLAR HAZIRLANACAK ŞUAN MANUAL GİRİLMEKTE
-        */
 
         buttonConfirm = findViewById(R.id.btnConfirm);
         buttonConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                editText = findViewById(R.id.eTxtInput);
                 topic = editText.getText().toString();
-                if (!Objects.equals(topic, "")){
-                    /*
-                    "LLM FONKSİYONU"
-                    startActivities("LLM",intent);
-                     */
-                    Intent intent = new Intent(PlayingActivity.this, QuestionsActivity.class);
-                    startActivity(intent);
+                if (topic!=null){
+                    QuestionCreator maker = new QuestionCreator();
+                    maker.generateText(topic, getApplicationContext(), new QuestionCreator.GenerateTextCallback() {
+                        @Override
+                        public void onSuccess(ArrayList<ArrayList<String>> questAnsw) {
+                            Intent intent = new Intent(PlayingActivity.this,QuestionsActivity.class);
+                            Bundle bundle = new Bundle();
+                            bundle.putSerializable("questansw", questAnsw);
+                            intent.putExtras(bundle);
+                            startActivity(intent);
+                        }
+
+                        @Override
+                        public void onFailure(Exception e) {
+                            System.out.println("Generation Failed");
+                        }
+                    });
+
                 }else {
                     String errorMessage = "Lütfen bir konu seçin !";
                     Toast.makeText(getApplicationContext(), errorMessage, Toast.LENGTH_SHORT).show();

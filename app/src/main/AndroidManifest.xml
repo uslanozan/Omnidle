@@ -19,6 +19,9 @@
             android:name=".PlayingActivity"
             android:exported="false" />
         <activity
+            android:name=".QuestionCreator"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
