@@ -89,11 +89,13 @@ public class QuestionCreator extends AppCompatActivity {
                             /* apiKey */ "AIzaSyBRyOUHZUCuYqHQK6JqRPObQpCv9krug8g");
             GenerativeModelFutures model = GenerativeModelFutures.from(gm);
         String prompt ="Her anahtarın \"a\"dan \"z\"ye kadar bir harf olduğu ve değerin iki öğeden oluşan bir liste olduğu bir Python sözlüğü oluşturun:\n" +
-                "O harfle başlayan, %1$s ile ilgili bir kelime, ancak %2$s kelimelerinden kaçının.\n" +
-                "O kelimeyle cevaplanabilecek bir soru.\n" +
+                "O harfle başlayan, %1$s ile ilgili bir kelime, ancak %2$s kelimelerinden kaçınmaya çalış.\n" +
+                "O kelimeyle cevaplanabilecek bir soru. Kelime harfine uygun olmalıdır harf C ise kelimede c ile başlamalıdır\n" +
                 "Örneğin, 'a' harfi için değer ['açı', 'Geometride bir açının ölçüsü nedir?'] olabilir.\n" +
                 "Her cevap, harfle ilgili tek kelimelik bir %1$s kavramı olmalıdır ve her soru net ve öz olmalıdır.\n" +
-                "Lütfen bunu A'dan Z'ye kadar tüm harfler için tamamlayın. Cevaplar türkçe olmak zorundadır. Cevaplar karşı geldikleri harfle başlamalıdır. a dan z ye türk alfabesi kullanılmalıdır. Alfabeye çok dikkat et bütün türkçe harfleri olucak ğ hariç.";
+                "Lütfen bunu A'dan Z'ye kadar tüm türkçe harfler için tamamlayın. Cevaplar türkçe olmak zorundadır.\n " +
+                "Cevaplar karşı geldikleri harfle başlamalıdır.\n " +
+                "A dan Z ye türk alfabesi kullanılmalıdır. Alfabeye çok dikkat et bütün türkçe harfleri olucak ğ hariç.\n";
             Content content =
                     new Content.Builder().addText(String.format(prompt,subject,string
  )).build();

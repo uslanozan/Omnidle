@@ -27,7 +27,7 @@ public class QuestionsActivity extends AppCompatActivity {
     TextView txtTimer;
     CountDownTimer timer;
     ArrayList<ArrayList<String>> questAnsw;
-
+    CircularLinkedList linkedList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,8 +41,8 @@ public class QuestionsActivity extends AppCompatActivity {
         });
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
-            questAnsw = (ArrayList<ArrayList<String>>) bundle.getSerializable("questansw"); // Use the same key
-            CircularLinkedList linkedList = new CircularLinkedList();
+            questAnsw = (ArrayList<ArrayList<String>>) bundle.getSerializable("questansw");
+            linkedList = new CircularLinkedList();
             for (ArrayList<String> question:questAnsw
                  ) {
                 linkedList.insertToEnd(question);
