@@ -30,7 +30,6 @@ public class QuestionsActivity extends AppCompatActivity {
     TextView txtTimer;
     CountDownTimer timer;
 
-    //TODO: ŞUANLIK LİSTE BOŞ
     CircularLinkedList<ArrayList<String>> questions = new CircularLinkedList<>();
     ArrayList<ArrayList<String>> questAnsw;
     Node<ArrayList<String>> question = questions.head;
@@ -97,19 +96,20 @@ public class QuestionsActivity extends AppCompatActivity {
                     //TODO: BİR SONRAKİNİ YAPIYOR KENDİSİNİ DEĞİL
                     txtLetter.setBackground(correctGreen);
                     System.out.println(eTxtAnswer.getText().toString()+"TRUE");
-                    question.isEmpty = false;
+                    question.color = "g";
                 }
                 // Pas geçme durumu
                 else {
                     if (eTxtAnswer.getText().toString().isEmpty()) {
                         txtLetter.setBackground(passYellow);
                         System.out.println(eTxtAnswer.getText().toString()+"PASS");
+                        question.color = "y";
                     }
                     // Yanlış
                     else {
                         txtLetter.setBackground(wrongRed);
                         System.out.println(eTxtAnswer.getText().toString()+"FALSE");
-                        question.isEmpty = false;
+                        question.color = "r";
                     }
                 }
                 //TODO: BEKLEME İŞİ ÇALIŞMIYOR DÜZELT

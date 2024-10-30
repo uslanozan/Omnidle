@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ResultScreenActivity"
+    android:background="@color/background_green"
+    >
+
+    <TextView
+        android:id="@+id/txtResults"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poetsen_one"
+        android:gravity="center"
+        android:text="@string/results"
+        android:textColor="@color/frame_green"
+        android:textSize="50sp"
+        tools:layout_editor_absoluteX="83dp"
+        tools:layout_editor_absoluteY="16dp" />
+
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="409dp"
+        android:layout_height="626dp"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="104dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>
