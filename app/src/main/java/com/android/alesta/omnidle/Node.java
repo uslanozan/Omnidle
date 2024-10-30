@@ -8,7 +8,7 @@ class Node<T> {
     public Node(T data) {
         this.data = data;
         this.next = null;
-        this.isEmpty=true;
+        this.isEmpty = true;
     }
 
     public String toString() {

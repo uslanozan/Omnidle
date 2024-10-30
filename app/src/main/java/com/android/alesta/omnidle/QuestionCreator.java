@@ -36,10 +36,8 @@ public class QuestionCreator extends AppCompatActivity {
     String string="";
     String filename = "myfile";
     String regex = "'\\w': \\['([^']*)', '([^']*)'\\]";
-    String topic;
     ArrayList<ArrayList<String>> questAnsw = new ArrayList<>();
 
-    EditText editText;
     ArrayList<String> turkishAlphabet = new ArrayList<>(Arrays.asList(
             "A", "B", "C", "Ç", "D", "E", "F", "G", "H", "I", "İ", "J", "K", "L", "M",
             "N", "O", "Ö", "P", "R", "S", "Ş", "T", "U", "Ü", "V", "Y", "Z"
@@ -49,7 +47,6 @@ public class QuestionCreator extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        Bundle bundle = getIntent().getExtras();
 
     }
 
@@ -76,9 +73,6 @@ public class QuestionCreator extends AppCompatActivity {
                 string=stringBuilder.toString();
             }
             catch (IOException e) {
-            }
-            finally {
-                String contents = stringBuilder.toString();
             }
 
             Pattern pattern = Pattern.compile(regex);

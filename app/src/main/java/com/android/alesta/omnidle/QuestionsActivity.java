@@ -1,8 +1,10 @@
 package com.android.alesta.omnidle;
 
+import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -10,12 +12,14 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import java.util.ArrayList;
 import java.util.Locale;
+import java.util.Objects;
 
 public class QuestionsActivity extends AppCompatActivity {
 
@@ -26,8 +30,12 @@ public class QuestionsActivity extends AppCompatActivity {
     TextView txtQuestion;
     TextView txtTimer;
     CountDownTimer timer;
+
+    //TODO: ŞUANLIK LİSTE BOŞ
+    CircularLinkedList<ArrayList<String>> questions = new CircularLinkedList<>();
     ArrayList<ArrayList<String>> questAnsw;
-    CircularLinkedList linkedList;
+    Node<ArrayList<String>> question = questions.head;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,27 +47,106 @@ public class QuestionsActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        // Renk tanımlamaları
+        Drawable correctGreen = ContextCompat.getDrawable(getApplicationContext(), R.drawable.circle_green);
+        Drawable wrongRed = ContextCompat.getDrawable(getApplicationContext(), R.drawable.circle_red);
+        Drawable passYellow = ContextCompat.getDrawable(getApplicationContext(), R.drawable.circle_yellow);
+        Drawable whiteEmpty = ContextCompat.getDrawable(getApplicationContext(), R.drawable.circle_white);
+
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
-            questAnsw = (ArrayList<ArrayList<String>>) bundle.getSerializable("questansw");
-            linkedList = new CircularLinkedList();
+            questAnsw = (ArrayList<ArrayList<String>>) bundle.getSerializable("questansw"); // Use the same key
             for (ArrayList<String> question:questAnsw
-                 ) {
-                linkedList.insertToEnd(question);
+            ) {
+                questions.insertToEnd(question);
 
             }
-            linkedList.display();
+            questions.display();
         }
 
+        question = questions.head;
+
+        // HARF
+        txtLetter = findViewById(R.id.txtLetter);
+
+        // SORU
+        txtQuestion = findViewById(R.id.txtQuestion);
+
+        System.out.println(questions);
+        System.out.println(question);
+
+        txtLetter.setText(question.data.get(0));
+        txtQuestion.setText(question.data.get(2));
+
+
+
+        // TIMER
         txtTimer = findViewById(R.id.txtTimer);
         startTime();
 
-        /* TODO: BURADA ITERATING YAPILACAK CIRCULAR LINKEDLIST İÇİNDE
-        for (int index = 0; index < ; index++) {
-        }
-        */
+
+        // BUTTON OK
+        btnOK = findViewById(R.id.btnOk);
+        btnOK.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // KULLANICI CEVABI
+                eTxtAnswer = findViewById(R.id.eTxtAnswer);
+                // Doğru
+                if (Objects.equals(eTxtAnswer.getText().toString().toLowerCase(), question.data.get(1).toLowerCase())){
+                    //TODO: BİR SONRAKİNİ YAPIYOR KENDİSİNİ DEĞİL
+                    txtLetter.setBackground(correctGreen);
+                    System.out.println(eTxtAnswer.getText().toString()+"TRUE");
+                    question.isEmpty = false;
+                }
+                // Pas geçme durumu
+                else {
+                    if (eTxtAnswer.getText().toString().isEmpty()) {
+                        txtLetter.setBackground(passYellow);
+                        System.out.println(eTxtAnswer.getText().toString()+"PASS");
+                    }
+                    // Yanlış
+                    else {
+                        txtLetter.setBackground(wrongRed);
+                        System.out.println(eTxtAnswer.getText().toString()+"FALSE");
+                        question.isEmpty = false;
+                    }
+                }
+                //TODO: BEKLEME İŞİ ÇALIŞMIYOR DÜZELT
+                /*
+                try {
+                    wait(500);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+                 */
+
+                txtLetter.setBackground(whiteEmpty);
+                question= question.next;
+                txtLetter.setText(question.data.get(0));
+                txtQuestion.setText(question.data.get(2));
+            }
+        });
+
+
+        // BUTTON PASS
+        btnPass = findViewById(R.id.btnPass);
+        btnPass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                txtLetter.setBackground(passYellow);
+                txtLetter.setBackground(whiteEmpty);
+                question= question.next;
+                txtLetter.setText(question.data.get(0));
+                txtQuestion.setText(question.data.get(2));
+            }
+        });
+
+
 
     }
+
 
     private void startTime() {
         timer = new CountDownTimer(60000*5,1000) {
