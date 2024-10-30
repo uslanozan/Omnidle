@@ -17,6 +17,21 @@ class CircularLinkedList<T> {
             newNode.next = head;
         }
     }
+    public void insertToEnd(T data,String color) {
+        Node<T> newNode = new Node<>(data);
+        newNode.color=color;
+        if (head == null) {
+            head = newNode;
+            head.next = head;
+        } else {
+            Node<T> iterator = head;
+            while (iterator.next != head) {
+                iterator = iterator.next;
+            }
+            iterator.next = newNode;
+            newNode.next = head;
+        }
+    }
 
     public void display() {
         if (head == null) return;

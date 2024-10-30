@@ -29,13 +29,17 @@ public class QuestionsActivity extends AppCompatActivity {
     TextView txtLetter;
     TextView txtQuestion;
     TextView txtTimer;
+    TextView txtLetterBefore;
+    TextView txtLetterAfter;
     CountDownTimer timer;
 
     //TODO: ŞUANLIK LİSTE BOŞ
     CircularLinkedList<ArrayList<String>> questions = new CircularLinkedList<>();
     ArrayList<ArrayList<String>> questAnsw;
-    Node<ArrayList<String>> question = questions.head;
+    ArrayList<ArrayList<String>> resultList=new ArrayList<>();;
 
+    Node<ArrayList<String>> question = questions.head;
+    Node<ArrayList<String>> head;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,18 +70,21 @@ public class QuestionsActivity extends AppCompatActivity {
         }
 
         question = questions.head;
-
+        head = questions.head;
         // HARF
         txtLetter = findViewById(R.id.txtLetter);
-
+        txtLetterBefore=findViewById(R.id.txtLetterBefore);
+        txtLetterAfter=findViewById(R.id.txtLetterAfter);
         // SORU
         txtQuestion = findViewById(R.id.txtQuestion);
 
+
         System.out.println(questions);
         System.out.println(question);
-
+        txtLetterBefore.setVisibility(View.INVISIBLE);
         txtLetter.setText(question.data.get(0));
         txtQuestion.setText(question.data.get(2));
+        txtLetterAfter.setText(question.next.data.get(0));
 
 
 
@@ -91,41 +98,48 @@ public class QuestionsActivity extends AppCompatActivity {
         btnOK.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                txtLetterAfter.setVisibility(View.INVISIBLE);
                 // KULLANICI CEVABI
                 eTxtAnswer = findViewById(R.id.eTxtAnswer);
+                txtLetterBefore.setVisibility(View.VISIBLE);
+
+
                 // Doğru
                 if (Objects.equals(eTxtAnswer.getText().toString().toLowerCase(), question.data.get(1).toLowerCase())){
                     //TODO: BİR SONRAKİNİ YAPIYOR KENDİSİNİ DEĞİL
-                    txtLetter.setBackground(correctGreen);
-                    System.out.println(eTxtAnswer.getText().toString()+"TRUE");
-                    question.isEmpty = false;
+                    txtLetterBefore.setBackground(correctGreen);
+                    question.data.add("g");
+                    resultList.add(question.data);
+                    Toast.makeText(getApplicationContext(), "True", Toast.LENGTH_SHORT).show();
                 }
                 // Pas geçme durumu
                 else {
                     if (eTxtAnswer.getText().toString().isEmpty()) {
-                        txtLetter.setBackground(passYellow);
+                        questions.insertToEnd(question.data, question.color);
+                        txtLetterBefore.setBackground(passYellow);
+                        question.color="y";
                         System.out.println(eTxtAnswer.getText().toString()+"PASS");
                     }
                     // Yanlış
                     else {
-                        txtLetter.setBackground(wrongRed);
                         System.out.println(eTxtAnswer.getText().toString()+"FALSE");
-                        question.isEmpty = false;
+                        question.data.add("r");
+                        resultList.add(question.data);
+                        txtLetterBefore.setBackground(wrongRed);
                     }
                 }
-                //TODO: BEKLEME İŞİ ÇALIŞMIYOR DÜZELT
-                /*
-                try {
-                    wait(500);
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
-                 */
 
                 txtLetter.setBackground(whiteEmpty);
-                question= question.next;
+                txtLetterBefore.setText(question.data.get(0));
+                if (question.next!=head){
+                    question= question.next;
+                    txtLetterAfter.setText(question.next.data.get(0));
+                    txtLetterAfter.setVisibility(View.VISIBLE);
+                }
                 txtLetter.setText(question.data.get(0));
                 txtQuestion.setText(question.data.get(2));
+
+                eTxtAnswer.setText("");
             }
         });
 
@@ -135,11 +149,24 @@ public class QuestionsActivity extends AppCompatActivity {
         btnPass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                txtLetter.setBackground(passYellow);
+                questions.insertToEnd(question.data,question.color);
+                txtLetterBefore.setVisibility(View.VISIBLE);
+                eTxtAnswer = findViewById(R.id.eTxtAnswer);
+                txtLetterAfter.setVisibility(View.INVISIBLE);
+                txtLetterBefore.setBackground(passYellow);
+                question.color="y";
                 txtLetter.setBackground(whiteEmpty);
-                question= question.next;
+
+                if (question.next!=head){
+                    txtLetterBefore.setText(question.data.get(0));
+                    question= question.next;
+                    txtLetterAfter.setText(question.next.data.get(0));
+                    txtLetterAfter.setVisibility(View.VISIBLE);
+                }
                 txtLetter.setText(question.data.get(0));
                 txtQuestion.setText(question.data.get(2));
+
+                eTxtAnswer.setText("");
             }
         });
 

@@ -11,6 +11,39 @@
 
 
     <TextView
+        android:id="@+id/txtLetterBefore"
+        android:layout_width="93dp"
+        android:layout_height="97dp"
+        android:layout_marginTop="36dp"
+        android:background="@drawable/circle_white"
+        android:fontFamily="@font/poetsen_one"
+        android:gravity="center"
+        android:text="A"
+        android:textColor="@color/frame_green"
+        android:textSize="60sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.05"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtTimer" />
+
+    <TextView
+        android:id="@+id/txtLetterAfter"
+        android:layout_width="93dp"
+        android:layout_height="97dp"
+        android:layout_marginTop="36dp"
+        android:background="@drawable/circle_white"
+        android:fontFamily="@font/poetsen_one"
+        android:gravity="center"
+        android:text="A"
+        android:textColor="@color/frame_green"
+        android:textSize="60sp"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.949"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtTimer" />
+
+    <TextView
         android:id="@+id/txtLetter"
         android:layout_width="140dp"
         android:layout_height="140dp"
