@@ -2,10 +2,11 @@ package com.android.alesta.omnidle;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -15,7 +16,6 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class PlayingActivity extends AppCompatActivity {
 
@@ -23,6 +23,8 @@ public class PlayingActivity extends AppCompatActivity {
     Button buttonConfirm;
     EditText editText;
     String topic;
+    TextView txtLoading;
+    ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +54,14 @@ public class PlayingActivity extends AppCompatActivity {
             public void onClick(View v) {
                 editText = findViewById(R.id.eTxtInput);
                 topic = editText.getText().toString();
+
+                txtLoading = findViewById(R.id.txtLoading);
+                progressBar = findViewById(R.id.progressBar);
+
                 if (!topic.isEmpty()){
+                    txtLoading.setVisibility(View.VISIBLE);
+                    progressBar.setVisibility(View.VISIBLE);
+
                     QuestionCreator maker = new QuestionCreator();
                     maker.generateText(topic, getApplicationContext(), new QuestionCreator.GenerateTextCallback() {
                         @Override
@@ -61,12 +70,19 @@ public class PlayingActivity extends AppCompatActivity {
                             Bundle bundle = new Bundle();
                             bundle.putSerializable("questansw", questAnsw);
                             intent.putExtras(bundle);
+
+                            txtLoading.setVisibility(View.GONE);
+                            progressBar.setVisibility(View.GONE);
+
                             startActivity(intent);
                         }
 
                         @Override
                         public void onFailure(Exception e) {
                             System.out.println("Generation Failed");
+
+                            txtLoading.setVisibility(View.GONE);
+                            progressBar.setVisibility(View.GONE);
                         }
                     });
 

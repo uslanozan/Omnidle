@@ -1,7 +1,6 @@
 package com.android.alesta.omnidle;
 
 import android.graphics.drawable.Drawable;
-import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
