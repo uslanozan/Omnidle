@@ -16,6 +16,7 @@ public class ResultScreenActivity extends AppCompatActivity {
 
     // HARF, CEVA, SORU, DOĞRU/YANLIŞ/PAS
     ArrayList<ArrayList<String>> resultList;
+    int size;
     ArrayAdapter<String> adapter;
     ListView listView;
 
@@ -31,7 +32,11 @@ public class ResultScreenActivity extends AppCompatActivity {
         });
         listView = findViewById(R.id.listView);
 
+        size = resultList.size();
 
+        for (int i = 0; i < size; i ++){
+            adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,resultList.get(i));
+        }
         // adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,resultList);
 
         listView.setAdapter(adapter);
