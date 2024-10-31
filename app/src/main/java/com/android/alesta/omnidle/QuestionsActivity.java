@@ -17,7 +17,10 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import java.text.Collator;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Locale;
 import java.util.Objects;
 
@@ -40,6 +43,7 @@ public class QuestionsActivity extends AppCompatActivity {
 
     Node<ArrayList<String>> question = questions.head;
     Node<ArrayList<String>> head;
+    Collator turkishCollator = Collator.getInstance(new Locale("tr", "TR"));
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,8 +106,6 @@ public class QuestionsActivity extends AppCompatActivity {
                 // KULLANICI CEVABI
                 eTxtAnswer = findViewById(R.id.eTxtAnswer);
                 txtLetterBefore.setVisibility(View.VISIBLE);
-
-
                 // Doğru
                 if (Objects.equals(eTxtAnswer.getText().toString().toLowerCase(), question.data.get(1).toLowerCase())){
                     //TODO: BİR SONRAKİNİ YAPIYOR KENDİSİNİ DEĞİL
@@ -115,31 +117,50 @@ public class QuestionsActivity extends AppCompatActivity {
                 // Pas geçme durumu
                 else {
                     if (eTxtAnswer.getText().toString().isEmpty()) {
-                        questions.insertToEnd(question.data, question.color);
                         txtLetterBefore.setBackground(passYellow);
                         question.color="y";
-                        System.out.println(eTxtAnswer.getText().toString()+"PASS");
+                        questions.insertToEnd(question.data, question.color);
                     }
                     // Yanlış
                     else {
-                        System.out.println(eTxtAnswer.getText().toString()+"FALSE");
                         question.data.add("r");
                         resultList.add(question.data);
                         txtLetterBefore.setBackground(wrongRed);
                     }
                 }
 
-                txtLetter.setBackground(whiteEmpty);
+
                 txtLetterBefore.setText(question.data.get(0));
+                question= question.next;
+                if (question.color.equalsIgnoreCase("y")){
+                    txtLetter.setBackground(passYellow);
+                }
+                else {
+                    txtLetter.setBackground(whiteEmpty);
+                }
                 if (question.next!=head){
-                    question= question.next;
-                    txtLetterAfter.setText(question.next.data.get(0));
-                    txtLetterAfter.setVisibility(View.VISIBLE);
+                    if (question.next.color.equalsIgnoreCase("y")){
+                        txtLetterAfter.setBackground(passYellow);
+                    }
+                    else {
+                        txtLetterAfter.setBackground(whiteEmpty);
+                    }
+                        txtLetterAfter.setText(question.next.data.get(0));
+                        txtLetterAfter.setVisibility(View.VISIBLE);
                 }
                 txtLetter.setText(question.data.get(0));
                 txtQuestion.setText(question.data.get(2));
 
                 eTxtAnswer.setText("");
+                if (resultList.size()==questAnsw.size()){
+                    Collections.sort(resultList, new Comparator<ArrayList<String>>() {
+                        @Override
+                        public int compare(ArrayList<String> list1, ArrayList<String> list2) {
+                            return turkishCollator.compare(list1.get(0), list2.get(0));
+                        }
+                    });
+                    System.out.println(resultList);
+                }
             }
         });
 
@@ -149,19 +170,29 @@ public class QuestionsActivity extends AppCompatActivity {
         btnPass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                questions.insertToEnd(question.data,question.color);
                 txtLetterBefore.setVisibility(View.VISIBLE);
                 eTxtAnswer = findViewById(R.id.eTxtAnswer);
                 txtLetterAfter.setVisibility(View.INVISIBLE);
                 txtLetterBefore.setBackground(passYellow);
                 question.color="y";
-                txtLetter.setBackground(whiteEmpty);
-
+                questions.insertToEnd(question.data,question.color);
+                txtLetterBefore.setText(question.data.get(0));
+                question= question.next;
+                if (question.color.equalsIgnoreCase("y")){
+                    txtLetter.setBackground(passYellow);
+                }
+                else {
+                    txtLetter.setBackground(whiteEmpty);
+                }
                 if (question.next!=head){
-                    txtLetterBefore.setText(question.data.get(0));
-                    question= question.next;
-                    txtLetterAfter.setText(question.next.data.get(0));
-                    txtLetterAfter.setVisibility(View.VISIBLE);
+                    if (question.next.color.equalsIgnoreCase("y")){
+                        txtLetterAfter.setBackground(passYellow);
+                    }
+                    else {
+                        txtLetterAfter.setBackground(whiteEmpty);
+                    }
+                        txtLetterAfter.setText(question.next.data.get(0));
+                        txtLetterAfter.setVisibility(View.VISIBLE);
                 }
                 txtLetter.setText(question.data.get(0));
                 txtQuestion.setText(question.data.get(2));

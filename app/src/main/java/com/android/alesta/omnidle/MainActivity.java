@@ -32,7 +32,9 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        String a="";
         try (FileOutputStream fos = getApplicationContext().openFileOutput("myfile", Context.MODE_PRIVATE)) {
+            fos.write(a.getBytes(StandardCharsets.UTF_8));
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         } catch (IOException e) {

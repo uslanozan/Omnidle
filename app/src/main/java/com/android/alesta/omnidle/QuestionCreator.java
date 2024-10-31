@@ -111,7 +111,7 @@ public class QuestionCreator extends AppCompatActivity {
                                 String answer = matcher.group(1);
                                 String question = matcher.group(2);
 
-                                questions.add(turkishAlphabet.get(i));
+                                questions.add(answer.substring(0,1).toUpperCase());
                                 questions.add(answer);
                                 questions.add(question);
                                 questAnsw.add(questions);
