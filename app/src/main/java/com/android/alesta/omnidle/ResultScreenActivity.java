@@ -14,10 +14,9 @@ import java.util.ArrayList;
 
 public class ResultScreenActivity extends AppCompatActivity {
 
-    // HARF, CEVA, SORU, DOĞRU/YANLIŞ/PAS
+    //TODO: BURANIN DÜZELMESİ GEREK ESKTRA BİLGİ ALMAM LAZIM
+    // HARF, CEVAP, SORU, DOĞRU/YANLIŞ/PAS
     ArrayList<ArrayList<String>> resultList;
-    int size;
-    ArrayAdapter<String> adapter;
     ListView listView;
 
     @Override
@@ -32,14 +31,14 @@ public class ResultScreenActivity extends AppCompatActivity {
         });
         listView = findViewById(R.id.listView);
 
-        size = resultList.size();
+        resultList = (ArrayList<ArrayList<String>>) getIntent().getSerializableExtra("resultList");
 
-        for (int i = 0; i < size; i ++){
-            adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,resultList.get(i));
+        if (resultList != null) {
+            ResultAdapter adapter = new ResultAdapter(this, resultList);
+            listView.setAdapter(adapter);
+        } else {
+            System.out.println("Liste boş");
         }
-        // adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,resultList);
-
-        listView.setAdapter(adapter);
 
     }
 }
