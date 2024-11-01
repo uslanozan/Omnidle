@@ -23,7 +23,6 @@
         android:text="A"
         android:textColor="@color/frame_green"
         android:textSize="60sp"
-        app:layout_constraintBottom_toTopOf="@+id/eTxtAnswer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/txtLetter"
         app:layout_constraintHorizontal_bias="0.358"
@@ -35,8 +34,7 @@
         android:layout_width="93dp"
         android:layout_height="97dp"
         android:layout_marginStart="27dp"
-        android:layout_marginTop="36dp"
-        android:layout_marginBottom="140dp"
+        android:layout_marginTop="120dp"
         android:background="@drawable/circle_white"
         android:fontFamily="@font/poetsen_one"
         android:gravity="center"
@@ -44,12 +42,11 @@
         android:textColor="@color/frame_green"
         android:textSize="60sp"
         android:visibility="visible"
-        app:layout_constraintBottom_toTopOf="@+id/eTxtAnswer"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.949"
+        app:layout_constraintHorizontal_bias="0.958"
         app:layout_constraintStart_toEndOf="@+id/txtLetter"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtTimer" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/txtLetter"
@@ -63,7 +60,6 @@
         android:textColor="@color/frame_green"
         android:textSize="120sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtTimer" />
 
@@ -71,7 +67,7 @@
         android:id="@+id/txtQuestion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="76dp"
+        android:layout_marginTop="104dp"
         android:fontFamily="@font/poetsen_one"
         android:text="EKSİ YÜKLÜ ATOM NEDİR?"
         android:textColor="@color/frame_green"

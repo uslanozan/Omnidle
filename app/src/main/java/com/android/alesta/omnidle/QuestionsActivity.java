@@ -82,14 +82,12 @@ public class QuestionsActivity extends AppCompatActivity {
         // SORU
         txtQuestion = findViewById(R.id.txtQuestion);
 
-
-        System.out.println(questions);
-        System.out.println(question);
+        
         txtLetterBefore.setVisibility(View.INVISIBLE);
         txtLetter.setText(question.data.get(0));
         txtQuestion.setText(question.data.get(2));
         txtLetterAfter.setText(question.next.data.get(0));
-
+        txtLetter.setBackground(whiteEmpty);
 
 
         // TIMER
@@ -111,6 +109,7 @@ public class QuestionsActivity extends AppCompatActivity {
                     //TODO: BİR SONRAKİNİ YAPIYOR KENDİSİNİ DEĞİL
                     txtLetterBefore.setBackground(correctGreen);
                     question.data.add("g");
+                    question.color="g";
                     resultList.add(question.data);
                     Toast.makeText(getApplicationContext(), "True", Toast.LENGTH_SHORT).show();
                 }
@@ -124,6 +123,7 @@ public class QuestionsActivity extends AppCompatActivity {
                     // Yanlış
                     else {
                         question.data.add("r");
+                        question.color="r";
                         resultList.add(question.data);
                         txtLetterBefore.setBackground(wrongRed);
                     }
@@ -133,17 +133,13 @@ public class QuestionsActivity extends AppCompatActivity {
                 txtLetterBefore.setText(question.data.get(0));
                 question= question.next;
                 if (question.color.equalsIgnoreCase("y")){
-                    txtLetter.setBackground(passYellow);
-                }
-                else {
-                    txtLetter.setBackground(whiteEmpty);
+                    if (txtLetter.getBackground().equals(whiteEmpty)){
+                        txtLetter.setBackground(passYellow);
+                    }
                 }
                 if (question.next!=head){
-                    if (question.next.color.equalsIgnoreCase("y")){
+                    if (question.next.color.equalsIgnoreCase("y")&& !txtLetterAfter.getBackground().equals(passYellow)){
                         txtLetterAfter.setBackground(passYellow);
-                    }
-                    else {
-                        txtLetterAfter.setBackground(whiteEmpty);
                     }
                         txtLetterAfter.setText(question.next.data.get(0));
                         txtLetterAfter.setVisibility(View.VISIBLE);
@@ -152,7 +148,7 @@ public class QuestionsActivity extends AppCompatActivity {
                 txtQuestion.setText(question.data.get(2));
 
                 eTxtAnswer.setText("");
-                if (resultList.size()==questAnsw.size()){
+                if (resultList.size()>=questAnsw.size()){
                     Collections.sort(resultList, new Comparator<ArrayList<String>>() {
                         @Override
                         public int compare(ArrayList<String> list1, ArrayList<String> list2) {
@@ -179,20 +175,16 @@ public class QuestionsActivity extends AppCompatActivity {
                 txtLetterBefore.setText(question.data.get(0));
                 question= question.next;
                 if (question.color.equalsIgnoreCase("y")){
-                    txtLetter.setBackground(passYellow);
-                }
-                else {
-                    txtLetter.setBackground(whiteEmpty);
+                    if (txtLetter.getBackground().equals(whiteEmpty)){
+                        txtLetter.setBackground(passYellow);
+                    }
                 }
                 if (question.next!=head){
-                    if (question.next.color.equalsIgnoreCase("y")){
+                    if (question.next.color.equalsIgnoreCase("y")&& !txtLetterAfter.getBackground().equals(passYellow)){
                         txtLetterAfter.setBackground(passYellow);
                     }
-                    else {
-                        txtLetterAfter.setBackground(whiteEmpty);
-                    }
                         txtLetterAfter.setText(question.next.data.get(0));
-                        txtLetterAfter.setVisibility(View.VISIBLE);
+                    txtLetterAfter.setVisibility(View.VISIBLE);
                 }
                 txtLetter.setText(question.data.get(0));
                 txtQuestion.setText(question.data.get(2));
