@@ -31,7 +31,11 @@ public class ResultScreenActivity extends AppCompatActivity {
         });
         listView = findViewById(R.id.listView);
 
-        resultList = (ArrayList<ArrayList<String>>) getIntent().getSerializableExtra("resultList");
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null) {
+            resultList = (ArrayList<ArrayList<String>>) bundle.getSerializable("resultList"); // Use the same key
+
+        }
 
         if (resultList != null) {
             ResultAdapter adapter = new ResultAdapter(this, resultList);
