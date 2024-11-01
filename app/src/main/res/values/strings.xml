@@ -5,4 +5,5 @@
     <string name="text_hint">Oynamak İstediğiniz Konuyu Seçin</string>
     <string name="button_confirm">ONAYLA</string>
     <string name="button_back">GERİ DÖN</string>
+    <string name="results">SONUÇLAR</string>
 </resources>

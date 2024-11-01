@@ -1,11 +1,6 @@
 package com.android.alesta.omnidle;
 
-<<<<<<< Updated upstream
-=======
-import android.app.ActionBar;
 import android.content.Intent;
-import android.graphics.Color;
->>>>>>> Stashed changes
 import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -67,27 +62,16 @@ public class QuestionsActivity extends AppCompatActivity {
         Drawable wrongRed = ContextCompat.getDrawable(getApplicationContext(), R.drawable.circle_red);
         Drawable passYellow = ContextCompat.getDrawable(getApplicationContext(), R.drawable.circle_yellow);
         Drawable whiteEmpty = ContextCompat.getDrawable(getApplicationContext(), R.drawable.circle_white);
+
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
-<<<<<<< Updated upstream
-            questAnsw = (ArrayList<ArrayList<String>>) bundle.getSerializable("questansw"); // Use the same key
-            for (ArrayList<String> question:questAnsw
-            ) {
-                questions.insertToEnd(question);
-=======
             questAnsw = (ArrayList<ArrayList<String>>) bundle.getSerializable("questansw");
-            System.out.println(questAnsw);
             for (ArrayList<String> question:questAnsw
             ) {
                 questions.insertToEnd(question);
             }
-
         }
->>>>>>> Stashed changes
 
-            }
-            questions.display();
-        }
 
         question = questions.head;
         head = questions.head;
@@ -97,8 +81,6 @@ public class QuestionsActivity extends AppCompatActivity {
         txtLetterAfter=findViewById(R.id.txtLetterAfter);
         // SORU
         txtQuestion = findViewById(R.id.txtQuestion);
-
-        
         txtLetterBefore.setVisibility(View.INVISIBLE);
         txtLetter.setText(question.data.get(0));
         txtQuestion.setText(question.data.get(2));
@@ -120,12 +102,10 @@ public class QuestionsActivity extends AppCompatActivity {
                 // KULLANICI CEVABI
                 eTxtAnswer = findViewById(R.id.eTxtAnswer);
                 txtLetterBefore.setVisibility(View.VISIBLE);
-
                 // Doğru
                 if (Objects.equals(eTxtAnswer.getText().toString().toLowerCase(), question.data.get(1).toLowerCase())){
-                    //TODO: BİR SONRAKİNİ YAPIYOR KENDİSİNİ DEĞİL
                     txtLetterBefore.setBackground(correctGreen);
-                    question.data.add("g");
+                    question.data.add("doğru");
                     question.color="g";
                     resultList.add(question.data);
                     Toast.makeText(getApplicationContext(), "True", Toast.LENGTH_SHORT).show();
@@ -133,29 +113,30 @@ public class QuestionsActivity extends AppCompatActivity {
                 // Pas geçme durumu
                 else {
                     if (eTxtAnswer.getText().toString().isEmpty()) {
-                        txtLetterBefore.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.circle_yellow));
+                        txtLetterBefore.setBackground(passYellow);
                         question.color="y";
                         questions.insertToEnd(question.data, question.color);
                     }
                     // Yanlış
                     else {
-                        question.data.add("r");
+                        question.data.add("yanlış");
                         question.color="r";
                         resultList.add(question.data);
                         txtLetterBefore.setBackground(wrongRed);
                     }
                 }
-                txtLetterBefore.setText(question.data.get(0));
 
+
+                txtLetterBefore.setText(question.data.get(0));
                 question= question.next;
                 if (question.color.equalsIgnoreCase("y")){
                     if (txtLetter.getBackground().equals(whiteEmpty)){
-                        txtLetter.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.circle_yellow));
+                        txtLetter.setBackground(passYellow);
                     }
                 }
                 if (question.next!=head){
                     if (question.next.color.equalsIgnoreCase("y")&& !txtLetterAfter.getBackground().equals(passYellow)){
-                        txtLetterAfter.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.circle_yellow));
+                        txtLetterAfter.setBackground(passYellow);
                     }
                         txtLetterAfter.setText(question.next.data.get(0));
                         txtLetterAfter.setVisibility(View.VISIBLE);
@@ -171,7 +152,11 @@ public class QuestionsActivity extends AppCompatActivity {
                             return turkishCollator.compare(list1.get(0), list2.get(0));
                         }
                     });
-                    System.out.println(resultList);
+                    Intent intent = new Intent(QuestionsActivity.this,ResultScreenActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("resultList", resultList);
+                    intent.putExtras(bundle);
+                    startActivity(intent);
                 }
             }
         });
@@ -182,6 +167,7 @@ public class QuestionsActivity extends AppCompatActivity {
         btnPass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 txtLetterBefore.setVisibility(View.VISIBLE);
                 eTxtAnswer = findViewById(R.id.eTxtAnswer);
                 txtLetterAfter.setVisibility(View.INVISIBLE);
@@ -228,6 +214,11 @@ public class QuestionsActivity extends AppCompatActivity {
             public void onFinish() {
                 txtTimer.setText("00:00");
                 Toast.makeText(QuestionsActivity.this,"Vakit Bitti", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(QuestionsActivity.this,ResultScreenActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("resultList", resultList);
+                intent.putExtras(bundle);
+                startActivity(intent);
             }
         }.start();
     }

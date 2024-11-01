@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="8dp"
+    android:background="@color/background_green">
+
+    <!-- Soru metni için TextView -->
+    <TextView
+        android:id="@+id/txtResultQuestion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Question"
+        android:textColor="@color/frame_green"
+        android:fontFamily="@font/poetsen_one"/>
+
+    <!-- Gerçek cevap için TextView -->
+    <TextView
+        android:id="@+id/txtResultReal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Real Answer :"
+        android:textColor="@color/frame_green"
+        android:fontFamily="@font/poetsen_one"/>
+
+    <!-- Kullanıcı cevabı için TextView -->
+    <TextView
+        android:id="@+id/txtResultUser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="User Answer :"
+        android:textColor="@color/frame_green"
+        android:fontFamily="@font/poetsen_one"/>
+
+</LinearLayout>
