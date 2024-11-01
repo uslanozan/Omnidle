@@ -1,15 +1,15 @@
 # Omnidle 🎮📚
 
-   Omnidle, BTK Hackathon 2024 etkinliği kapsamında Muğla Sıtkı Koçman Üniversitesi öğrencileri Ozan Uslan, Rıdvan Barış Özden ve Süleyman Emre Parlak tarafından geliştirilen bir mobil oyundur. Eğitim odaklı bu projede, Google’ın geliştirdiği “Gemini” büyük dil modelinin kullanılması istenmiştir. Projede büyük dil modelinin işlevi, esnek ve üretken bir veritabanı olarak çalışması ve kullanıcı tarafından belirlenen konu üzerine içerik oluşturması olarak belirlenmiştir. Yapay zekanın günümüz koşullarındaki işlevselliği ve sağladığı başarılı çıktılar, uygulamanın sürdürülebilirliği ve işleyişi açısından önemli bir rol oynamıştır.  
+   Omnidle, BTK Hackathon 2024 etkinliği kapsamında Muğla Sıtkı Koçman Üniversitesi Bilgisayar Mühendisliği öğrencileri Ozan Uslan, Rıdvan Barış Özden ve Süleyman Emre Parlak tarafından geliştirilen bir mobil oyundur. Eğitim odaklı bu projede, Google’ın geliştirdiği “Gemini” büyük dil modelinin kullanılması istenmiştir. Projede büyük dil modelinin işlevi, esnek ve üretken bir veritabanı olarak çalışması ve kullanıcı tarafından belirlenen konu üzerine içerik oluşturması olarak belirlenmiştir. Yapay zekanın günümüz koşullarındaki işlevselliği ve sağladığı başarılı çıktılar, uygulamanın sürdürülebilirliği ve işleyişi açısından önemli bir rol oynamıştır.  
 
    Takımımızın yetkinliği ve tecrübesi sayesinde proje Java dilinde yazılmış olup, Android Studio teknolojisi kullanılmıştır. Kullanıcı dostu arayüzü ve kolay kullanımı ile geniş bir kitleye hitap etmektedir. Yapay zekâ desteği ile içeriklerin oluşturulması, oyuna aktif bir güncellik katmakta ve içeriklerin kullanıcı isteklerine göre uyarlanabilir olmasını sağlamaktadır.
 
 ## İçindekiler
 
-- [Nasıl Bir Oyundur?](#nasıl-bir-oyundur)
-- [Eğitim ile İlişkisi](#eğitim-ile-i̇lişkisi)
-- [Nasıl Oynanır?](#nasıl-oynanır)
-- [Kullanıcı Arayüzü](#kullanıcı-arayüzü)
+- [Nasıl Bir Oyundur?](#nasil-bir-oyundur)
+- [Eğitim ile İlişkisi](#egitim-ile-iliskisi)
+- [Nasıl Oynanır?](#nasil-oynanir)
+- [Kullanıcı Arayüzü](#kullanici-arayuzu)
 
 
 ### Nasıl Bir Oyundur? 🎲  
