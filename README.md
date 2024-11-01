@@ -6,10 +6,10 @@
 
 ## İçindekiler
 
-- [Nasıl Bir Oyundur?](#nasil-bir-oyundur)
-- [Eğitim ile İlişkisi](#egitim-ile-iliskisi)
-- [Nasıl Oynanır?](#nasil-oynanir)
-- [Kullanıcı Arayüzü](#kullanici-arayuzu)
+- [Nasıl Bir Oyundur?](#nasıl-bir-oyundur-)
+- [Eğitim ile İlişkisi](#eğitim-ile-i̇lişkisi-)
+- [Nasıl Oynanır?](#nasıl-oynanır-%EF%B8%8F)
+- [Kullanıcı Arayüzü](#kullanıcı-arayüzü-)
 
 
 ### Nasıl Bir Oyundur? 🎲  
