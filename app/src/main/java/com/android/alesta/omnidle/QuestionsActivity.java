@@ -113,7 +113,7 @@ public class QuestionsActivity extends AppCompatActivity {
                 // Pas geçme durumu
                 else {
                     if (eTxtAnswer.getText().toString().isEmpty()) {
-                        txtLetterBefore.setBackground(passYellow);
+                        txtLetterBefore.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.circle_yellow));
                         question.color="y";
                         questions.insertToEnd(question.data, question.color);
                     }
@@ -131,12 +131,12 @@ public class QuestionsActivity extends AppCompatActivity {
                 question= question.next;
                 if (question.color.equalsIgnoreCase("y")){
                     if (txtLetter.getBackground().equals(whiteEmpty)){
-                        txtLetter.setBackground(passYellow);
+                        txtLetter.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.circle_yellow));
                     }
                 }
                 if (question.next!=head){
                     if (question.next.color.equalsIgnoreCase("y")&& !txtLetterAfter.getBackground().equals(passYellow)){
-                        txtLetterAfter.setBackground(passYellow);
+                        txtLetterAfter.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.circle_yellow));
                     }
                         txtLetterAfter.setText(question.next.data.get(0));
                         txtLetterAfter.setVisibility(View.VISIBLE);
