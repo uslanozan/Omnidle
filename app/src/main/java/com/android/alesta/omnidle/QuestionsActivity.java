@@ -1,6 +1,7 @@
 package com.android.alesta.omnidle;
 
 import android.graphics.drawable.Drawable;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
@@ -16,7 +17,10 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import java.text.Collator;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Locale;
 import java.util.Objects;
 
@@ -28,12 +32,18 @@ public class QuestionsActivity extends AppCompatActivity {
     TextView txtLetter;
     TextView txtQuestion;
     TextView txtTimer;
+    TextView txtLetterBefore;
+    TextView txtLetterAfter;
     CountDownTimer timer;
 
+    //TODO: ŞUANLIK LİSTE BOŞ
     CircularLinkedList<ArrayList<String>> questions = new CircularLinkedList<>();
     ArrayList<ArrayList<String>> questAnsw;
-    Node<ArrayList<String>> question = questions.head;
+    ArrayList<ArrayList<String>> resultList=new ArrayList<>();;
 
+    Node<ArrayList<String>> question = questions.head;
+    Node<ArrayList<String>> head;
+    Collator turkishCollator = Collator.getInstance(new Locale("tr", "TR"));
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,19 +74,20 @@ public class QuestionsActivity extends AppCompatActivity {
         }
 
         question = questions.head;
-
+        head = questions.head;
         // HARF
         txtLetter = findViewById(R.id.txtLetter);
-
+        txtLetterBefore=findViewById(R.id.txtLetterBefore);
+        txtLetterAfter=findViewById(R.id.txtLetterAfter);
         // SORU
         txtQuestion = findViewById(R.id.txtQuestion);
 
-        System.out.println(questions);
-        System.out.println(question);
-
+        
+        txtLetterBefore.setVisibility(View.INVISIBLE);
         txtLetter.setText(question.data.get(0));
         txtQuestion.setText(question.data.get(2));
-
+        txtLetterAfter.setText(question.next.data.get(0));
+        txtLetter.setBackground(whiteEmpty);
 
 
         // TIMER
@@ -89,42 +100,63 @@ public class QuestionsActivity extends AppCompatActivity {
         btnOK.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                txtLetterAfter.setVisibility(View.INVISIBLE);
                 // KULLANICI CEVABI
                 eTxtAnswer = findViewById(R.id.eTxtAnswer);
+                txtLetterBefore.setVisibility(View.VISIBLE);
                 // Doğru
                 if (Objects.equals(eTxtAnswer.getText().toString().toLowerCase(), question.data.get(1).toLowerCase())){
                     //TODO: BİR SONRAKİNİ YAPIYOR KENDİSİNİ DEĞİL
-                    txtLetter.setBackground(correctGreen);
-                    System.out.println(eTxtAnswer.getText().toString()+"TRUE");
-                    question.color = "g";
+                    txtLetterBefore.setBackground(correctGreen);
+                    question.data.add("g");
+                    question.color="g";
+                    resultList.add(question.data);
+                    Toast.makeText(getApplicationContext(), "True", Toast.LENGTH_SHORT).show();
                 }
                 // Pas geçme durumu
                 else {
                     if (eTxtAnswer.getText().toString().isEmpty()) {
-                        txtLetter.setBackground(passYellow);
-                        System.out.println(eTxtAnswer.getText().toString()+"PASS");
-                        question.color = "y";
+                        txtLetterBefore.setBackground(passYellow);
+                        question.color="y";
+                        questions.insertToEnd(question.data, question.color);
                     }
                     // Yanlış
                     else {
-                        txtLetter.setBackground(wrongRed);
-                        System.out.println(eTxtAnswer.getText().toString()+"FALSE");
-                        question.color = "r";
+                        question.data.add("r");
+                        question.color="r";
+                        resultList.add(question.data);
+                        txtLetterBefore.setBackground(wrongRed);
                     }
                 }
-                //TODO: BEKLEME İŞİ ÇALIŞMIYOR DÜZELT
-                /*
-                try {
-                    wait(500);
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
-                 */
 
-                txtLetter.setBackground(whiteEmpty);
+
+                txtLetterBefore.setText(question.data.get(0));
                 question= question.next;
+                if (question.color.equalsIgnoreCase("y")){
+                    if (txtLetter.getBackground().equals(whiteEmpty)){
+                        txtLetter.setBackground(passYellow);
+                    }
+                }
+                if (question.next!=head){
+                    if (question.next.color.equalsIgnoreCase("y")&& !txtLetterAfter.getBackground().equals(passYellow)){
+                        txtLetterAfter.setBackground(passYellow);
+                    }
+                        txtLetterAfter.setText(question.next.data.get(0));
+                        txtLetterAfter.setVisibility(View.VISIBLE);
+                }
                 txtLetter.setText(question.data.get(0));
                 txtQuestion.setText(question.data.get(2));
+
+                eTxtAnswer.setText("");
+                if (resultList.size()>=questAnsw.size()){
+                    Collections.sort(resultList, new Comparator<ArrayList<String>>() {
+                        @Override
+                        public int compare(ArrayList<String> list1, ArrayList<String> list2) {
+                            return turkishCollator.compare(list1.get(0), list2.get(0));
+                        }
+                    });
+                    System.out.println(resultList);
+                }
             }
         });
 
@@ -134,11 +166,30 @@ public class QuestionsActivity extends AppCompatActivity {
         btnPass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                txtLetter.setBackground(passYellow);
-                txtLetter.setBackground(whiteEmpty);
+                txtLetterBefore.setVisibility(View.VISIBLE);
+                eTxtAnswer = findViewById(R.id.eTxtAnswer);
+                txtLetterAfter.setVisibility(View.INVISIBLE);
+                txtLetterBefore.setBackground(passYellow);
+                question.color="y";
+                questions.insertToEnd(question.data,question.color);
+                txtLetterBefore.setText(question.data.get(0));
                 question= question.next;
+                if (question.color.equalsIgnoreCase("y")){
+                    if (txtLetter.getBackground().equals(whiteEmpty)){
+                        txtLetter.setBackground(passYellow);
+                    }
+                }
+                if (question.next!=head){
+                    if (question.next.color.equalsIgnoreCase("y")&& !txtLetterAfter.getBackground().equals(passYellow)){
+                        txtLetterAfter.setBackground(passYellow);
+                    }
+                        txtLetterAfter.setText(question.next.data.get(0));
+                    txtLetterAfter.setVisibility(View.VISIBLE);
+                }
                 txtLetter.setText(question.data.get(0));
                 txtQuestion.setText(question.data.get(2));
+
+                eTxtAnswer.setText("");
             }
         });
 

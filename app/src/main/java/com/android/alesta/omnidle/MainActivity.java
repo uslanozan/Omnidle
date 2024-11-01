@@ -15,6 +15,7 @@ import androidx.core.view.WindowInsetsCompat;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -31,9 +32,9 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-
+        String a="";
         try (FileOutputStream fos = getApplicationContext().openFileOutput("myfile", Context.MODE_PRIVATE)) {
-            fos.write("".getBytes());
+            fos.write(a.getBytes(StandardCharsets.UTF_8));
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         } catch (IOException e) {
