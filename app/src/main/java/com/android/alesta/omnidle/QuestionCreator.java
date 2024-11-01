@@ -80,7 +80,7 @@ public class QuestionCreator extends AppCompatActivity {
             GenerativeModel gm =
                     new GenerativeModel(
                             /* modelName */ "gemini-1.5-pro",
-                            /* apiKey */ "AIzaSyBRyOUHZUCuYqHQK6JqRPObQpCv9krug8g");
+                            /* apiKey */ "");
             GenerativeModelFutures model = GenerativeModelFutures.from(gm);
         String prompt ="Her anahtarın \"a\"dan \"z\"ye kadar bir harf olduğu ve değerin iki öğeden oluşan bir Python sözlüğü oluşturun:\n" +
                 "O harfle başlayan, %1$s ile ilgili bir kelime, ancak %2$s kelimelerini cevaplarda kullanma.\n" +
