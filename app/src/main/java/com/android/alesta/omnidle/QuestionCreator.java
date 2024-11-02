@@ -1,11 +1,14 @@
 package com.android.alesta.omnidle;
 
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.widget.EditText;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.ai.client.generativeai.BuildConfig;
 import com.google.ai.client.generativeai.GenerativeModel;
 import com.google.ai.client.generativeai.java.GenerativeModelFutures;
 import com.google.ai.client.generativeai.type.Content;
@@ -38,10 +41,6 @@ public class QuestionCreator extends AppCompatActivity {
     String regex = "'\\w': \\['([^']*)', '([^']*)'\\]";
     ArrayList<ArrayList<String>> questAnsw= new ArrayList<>();
 
-    ArrayList<String> turkishAlphabet = new ArrayList<>(Arrays.asList(
-            "A", "B", "C", "Ç", "D", "E", "F", "G", "H", "I", "İ", "J", "K", "L", "M",
-            "N", "O", "Ö", "P", "R", "S", "Ş", "T", "U", "Ü", "V", "Y", "Z"
-    ));
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,13 +73,22 @@ public class QuestionCreator extends AppCompatActivity {
             }
             catch (IOException e) {
             }
+            Bundle bundle =new Bundle();
+            try {
+                ApplicationInfo app = context.getPackageManager().getApplicationInfo(context.getPackageName(), PackageManager.GET_META_DATA);
+                bundle =app.metaData;
+            } catch (PackageManager.NameNotFoundException e) {
+                throw new RuntimeException(e);
+            }
+
 
             Pattern pattern = Pattern.compile(regex);
 
             GenerativeModel gm =
                     new GenerativeModel(
                             /* modelName */ "gemini-1.5-pro",
-                            /* apiKey */ "");
+                            /* apiKey */ bundle.getString("api"));
+
             GenerativeModelFutures model = GenerativeModelFutures.from(gm);
         String prompt ="Her anahtarın \"a\"dan \"z\"ye kadar bir harf olduğu ve değerin iki öğeden oluşan bir Python sözlüğü oluşturun:\n" +
                 "O harfle başlayan, %1$s ile ilgili bir kelime, ancak %2$s kelimelerini cevaplarda kullanma.\n" +

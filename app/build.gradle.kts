@@ -1,6 +1,6 @@
 plugins {
     alias(libs.plugins.androidApplication)
-
+    id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
 }
 
 android {
@@ -44,4 +44,14 @@ dependencies {
     implementation("com.google.ai.client.generativeai:generativeai:0.9.0")
     implementation("com.google.guava:guava:33.3.1-android")
     implementation("org.reactivestreams:reactive-streams:1.0.4")
+}
+secrets {
+    // Optionally specify a different file name containing your secrets.
+    // The plugin defaults to "local.properties"
+    propertiesFileName = "local.properties"
+    defaultPropertiesFileName = "local.properties"
+
+    // Add keys that the plugin should ignore from the properties file
+    ignoreList.add("keyToIgnore")
+    ignoreList.add("ignore*")
 }
