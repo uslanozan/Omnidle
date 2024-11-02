@@ -105,6 +105,7 @@ public class QuestionsActivity extends AppCompatActivity {
                 // Doğru
                 if (Objects.equals(eTxtAnswer.getText().toString().toLowerCase(), question.data.get(1).toLowerCase())){
                     txtLetterBefore.setBackground(correctGreen);
+                    // TODO: GİTCEK
                     question.data.add("doğru");
                     question.color="g";
                     resultList.add(question.data);
@@ -115,7 +116,7 @@ public class QuestionsActivity extends AppCompatActivity {
                     if (eTxtAnswer.getText().toString().isEmpty()) {
                         txtLetterBefore.setBackground(passYellow);
                         question.color="y";
-                        questions.insertToEnd(question.data, question.color);
+
                     }
                     // Yanlış
                     else {
@@ -125,6 +126,7 @@ public class QuestionsActivity extends AppCompatActivity {
                         txtLetterBefore.setBackground(wrongRed);
                     }
                 }
+
 
 
                 txtLetterBefore.setText(question.data.get(0));
@@ -173,7 +175,6 @@ public class QuestionsActivity extends AppCompatActivity {
                 txtLetterAfter.setVisibility(View.INVISIBLE);
                 txtLetterBefore.setBackground(passYellow);
                 question.color="y";
-                questions.insertToEnd(question.data,question.color);
                 txtLetterBefore.setText(question.data.get(0));
                 question= question.next;
                 if (question.color.equalsIgnoreCase("y")){
